@@ -12,7 +12,7 @@ echo "Installing Django..."
 pip install django
 echo "Starting Django project from template..."
 django-admin startproject --template=$GITHUB_URL --extension=py,md --name=Procfile $PROJECT_NAME .
-echo "Installing template project requirements..."
+echo "Installing template package requirements..."
 pip install -r requirements.txt
 echo "Deactivating virtual environment..."
 deactivate
@@ -25,4 +25,4 @@ do
 	done
 done
 
-echo "Done."
+echo "Virtual environment configuration is complete."

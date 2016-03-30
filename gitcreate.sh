@@ -2,7 +2,7 @@
 
 # I got this command from jerrykrinock who forked from
 # https://gist.github.com/robwierzbowski/5430952/
-# and changed it to fit my workflow/scripts
+# and then I changed it to fit my workflow/scripts
 
 REPONAME=$1
 USERNAME=$2

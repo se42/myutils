@@ -25,12 +25,3 @@ def set_local_env_variables():
 	# set KEY and DEV_DB_URL as strings
 	os.environ['SECRET_KEY'] = None
 	os.environ['DATABASE_URL'] = None
-
-
-####################
-### HEROKU NOTES ###
-####################
-
-## DATABASE MIGRATIONS
-# heroku apps		to list app names
-# heroku run --app APP_NAME bash		to launch one-off dyno for running migrations
