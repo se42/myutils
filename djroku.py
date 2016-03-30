@@ -1,9 +1,27 @@
+"""
+Script I use to create new Heroku applications with the following features:
+	- Basic implementation of default Django authentication views
+	- Dictionary of basic Bootstrap3 templates to choose from
+	- Heroku apps named PROJECT_NAME and dev-PROJECT_NAME configured in a pipeline
+	- Each app has its own Postgres database with the auth models automatically migrated
+	- User is prompted to set up first superuser for each application
+	- App PROJECT_NAME is set to auto-deploy from Github master branch
+	- App dev-PROJECT_NAME is set to auto-deply from Github dev-master branch
+	- All loacl git configuration is automated
+	- Virtual environment is created and template packages automatically installed
+
+There are few manual inputs and manipulations required (e.g. superuser input,
+some CMD-F on the html templates as the Django template engine wasn't playing
+nice, copy/pasting local DATABASE_URL and SECRET_KEY values into the
+local_settings.py file, pointing Heroku apps at the right Github branches).
+
+The whole process takes less than 10 minutes.
+"""
+
 import os
 import random
 import shutil
-import subprocess as sp
 import sys
-import venv
 
 section = '**********************************************************************'
 
@@ -122,8 +140,9 @@ print(section)
 
 # get dev-app DATABASE_URL and generate local secret key for local_settings.py file
 print('DATABASE_URL for dev-{0}:'.format(project_name))
-os.system('heroku config:get --app dev-{0} --shell DATABASE_URL'.format(project_name))
-print('SECRET_KEY for local development: ', secret_key_gen())
+os.system('heroku config:get --app dev-{0} DATABASE_URL'.format(project_name))
+print('SECRET_KEY for local development:')
+print(secret_key_gen())
 print()
 print('Copy/paste those two values into the local_settings.py file that just opened.')
 continue_when_ready()
@@ -131,15 +150,4 @@ os.system('heroku apps:open --app {0}'.format(project_name))
 os.system('heroku apps:open --app dev-{0}'.format(project_name))
 print(section)
 print("You're ready to go!")
-
-
-
-
-
-
-
-
-
-
-
 
